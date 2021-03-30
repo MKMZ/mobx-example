@@ -1,5 +1,7 @@
-import { makeAutoObservable, observable, runInAction } from "mobx";
+import { action, makeAutoObservable, observable, runInAction } from "mobx";
 import { DogsApiResponseMessage, getBreedsList, GetDogPicture, getRandomPicture, getRandomPictureByBreed } from "../../api/DogsApi/commands";
+
+const pepeSadUrl = "./pepeSad.png";
 
 export type Breed = {
     name: string;
@@ -31,12 +33,17 @@ export class DogStore {
         });
     }
 
-    async loadRandomPictureByBreed(breedName: string) {
-        const response = await getRandomPictureByBreed(breedName);
-        runInAction(() => {
-            this.breedName = breedName;
-            this.dogPictureUrl = response.message;
-        });
+    loadRandomPictureByBreed(breedName: string) {
+        getRandomPictureByBreed(breedName).then(
+            action("getRandomPictureByBreedSuccess", response => {
+                this.breedName = breedName;
+                this.dogPictureUrl = response.message;
+            }),
+            action("getRandomPictureByBreedFailure", (error) => {
+                console.error(error);
+                this.dogPictureUrl = pepeSadUrl;
+            })
+        );
     }
 
     *refreshRandomPicture() {
