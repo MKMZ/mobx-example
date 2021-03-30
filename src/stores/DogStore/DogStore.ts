@@ -1,5 +1,5 @@
 import { makeAutoObservable, observable, runInAction } from "mobx";
-import { DogsApiResponseMessage, getBreedsList, getRandomPicture, getRandomPictureByBreed } from "../../api/DogsApi/commands";
+import { DogsApiResponseMessage, getBreedsList, GetDogPicture, getRandomPicture, getRandomPictureByBreed } from "../../api/DogsApi/commands";
 
 export type Breed = {
     name: string;
@@ -8,7 +8,8 @@ export type Breed = {
 
 export class DogStore {
     private rawBreeds: DogsApiResponseMessage = {};
-
+    private breedName: string | null = null;
+    
     public dogPictureUrl: string | null = null;
 
     constructor() {
@@ -33,6 +34,21 @@ export class DogStore {
     async loadRandomPictureByBreed(breedName: string) {
         const response = await getRandomPictureByBreed(breedName);
         runInAction(() => {
+            this.breedName = breedName;
+            this.dogPictureUrl = response.message;
+        });
+    }
+
+    async refreshRandomPicture() {
+        let response: GetDogPicture;
+        
+        if (this.breedName) {
+            response = await getRandomPictureByBreed(this.breedName);
+        }
+        else {
+            response = await getRandomPicture();
+        }
+        runInAction(() => {
             this.dogPictureUrl = response.message;
         });
     }
@@ -42,5 +58,9 @@ export class DogStore {
             name: key,
             subBreeds: this.rawBreeds[key],
         }));
+    }
+
+    get selectedBreed() {
+        return this.breedName ?? "None";
     }
 }

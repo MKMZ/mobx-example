@@ -1,3 +1,7 @@
 .BreedSelectorPanel {
     margin: 30px;
 }
+
+.BreedSelectorChoice {
+    display: contents;
+}
