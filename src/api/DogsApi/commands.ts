@@ -1,4 +1,3 @@
-
 const dogApiUrl = "https://dog.ceo/api"
 const getBreedsListUrl = `${dogApiUrl}/breeds/list/all`;
 const getRandomPictureUrl = `${dogApiUrl}/breeds/image/random`;

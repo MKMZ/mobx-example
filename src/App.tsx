@@ -7,6 +7,7 @@ import 'antd/dist/antd.css';
 import DogPictureViewer from './components/DogPictureViewer/DogPictureViewer';
 import { autorun } from 'mobx';
 import { BreedNotSelectedText } from './stores/DogStore/DogStore';
+import { notification } from 'antd';
 
 const rootStore = new RootStore();
 
@@ -21,7 +22,11 @@ const App: React.FC = () => (
 
 autorun(() => {
   if (rootStore.dogStore.selectedBreed !== BreedNotSelectedText) {
-    console.log(`Weronika nie odchodź! Piesek rasy ${rootStore.dogStore.selectedBreed} płacze!`);
+    notification.open({
+      message: "Weronika nie odchodź!",
+      description: `Piesek rasy ${rootStore.dogStore.selectedBreed} płacze!`,
+      duration: 2
+    });
   }
 });
 
