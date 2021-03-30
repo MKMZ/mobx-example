@@ -2,7 +2,7 @@
 const dogApiUrl = "https://dog.ceo/api"
 const getBreedsListUrl = `${dogApiUrl}/breeds/list/all`;
 const getRandomPictureUrl = `${dogApiUrl}/breeds/image/random`;
-const getRandomPictureByBreedUrl = (breedName: string) => `${dogApiUrl}/breed/${breedName}/images/random/asdasd/asadasd`
+const getRandomPictureByBreedUrl = (breedName: string) => `${dogApiUrl}/breed/${breedName}/images/random`
 
 export type DogsApiResponseStatus = "success" | "failure";
 

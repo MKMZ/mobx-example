@@ -8,6 +8,8 @@ export type Breed = {
     subBreeds: string[];
 }
 
+export const BreedNotSelectedText = "None";
+
 export class DogStore {
     private rawBreeds: DogsApiResponseMessage = {};
     private breedName: string | null = null;
@@ -66,6 +68,6 @@ export class DogStore {
     }
 
     get selectedBreed() {
-        return this.breedName ?? "None";
+        return this.breedName ?? BreedNotSelectedText;
     }
 }
