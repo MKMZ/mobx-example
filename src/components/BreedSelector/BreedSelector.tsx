@@ -20,7 +20,6 @@ const BreedSelector = observer(() => {
     return (
         <div>
             <Space wrap className="BreedSelectorPanel">
-                <p className="BreedSelectorChoice">Selected breed: {dogStore?.selectedBreed}</p>
                 <Select className="BreedSelectorSelect" onChange={breedSelected}>
                     {breedMenu}
                 </Select>

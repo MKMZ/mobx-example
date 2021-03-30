@@ -1,3 +1,7 @@
 .DogPictureViewerPanel {
     margin: 50px;
 }
+
+.DogPictureViewerBreed {
+    display: contents;
+}

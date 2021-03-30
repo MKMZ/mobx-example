@@ -9,6 +9,7 @@ export type Breed = {
 }
 
 export const BreedNotSelectedText = "None";
+export const RandomBreedText = "Random";
 
 export class DogStore {
     private rawBreeds: DogsApiResponseMessage = {};
@@ -69,5 +70,9 @@ export class DogStore {
 
     get selectedBreed() {
         return this.breedName ?? BreedNotSelectedText;
+    }
+
+    get displayedBreed() {
+        return this.breedName ?? RandomBreedText;
     }
 }

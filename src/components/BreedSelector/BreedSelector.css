@@ -2,10 +2,6 @@
     margin: 30px;
 }
 
-.BreedSelectorChoice {
-    display: contents;
-}
-
 .BreedSelectorSelect {
     min-width: 100px;
 }

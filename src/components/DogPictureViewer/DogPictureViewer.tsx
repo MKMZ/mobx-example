@@ -7,10 +7,14 @@ const DogPictureViewer = observer(({ dogstore }: { dogstore: DogStore | null }) 
     (dogstore?.dogPictureUrl ?
         (
             <div>
-                <Space wrap className="DogPictureViewerPanel">
-                    <Image width={600} src={dogstore?.dogPictureUrl} />
-                </Space>
-                
+                <div>
+                    <Space wrap className="DogPictureViewerPanel">
+                        <Image width={600} src={dogstore?.dogPictureUrl} />
+                    </Space>
+                </div>
+                <div>
+                    <p className="DogPictureViewerBreed">Breed: {dogstore?.displayedBreed}</p>
+                </div>
             </div>
         ) : (
             <div>
