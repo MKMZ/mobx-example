@@ -39,18 +39,16 @@ export class DogStore {
         });
     }
 
-    async refreshRandomPicture() {
+    *refreshRandomPicture() {
         let response: GetDogPicture;
         
         if (this.breedName) {
-            response = await getRandomPictureByBreed(this.breedName);
+            response = yield getRandomPictureByBreed(this.breedName);
         }
         else {
-            response = await getRandomPicture();
+            response = yield getRandomPicture();
         }
-        runInAction(() => {
-            this.dogPictureUrl = response.message;
-        });
+        this.dogPictureUrl = response.message;
     }
 
     get breeds() {
