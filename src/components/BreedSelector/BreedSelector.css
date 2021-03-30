@@ -5,3 +5,7 @@
 .BreedSelectorChoice {
     display: contents;
 }
+
+.BreedSelectorSelect {
+    min-width: 100px;
+}

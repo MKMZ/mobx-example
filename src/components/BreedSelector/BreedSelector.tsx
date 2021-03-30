@@ -1,28 +1,29 @@
-import { Button, Dropdown, Menu, Space } from "antd";
+import { Button, Space, Select } from "antd";
 import { observer } from "mobx-react-lite";
 import { useContext } from "react";
 import RootStoreContext from "../../stores/RootStore/RootStoreContext";
 import './BreedSelector.css';
 
+const { Option } = Select;
+
 const BreedSelector = observer(() => {
     const rootStore = useContext(RootStoreContext);
     const dogStore = rootStore?.dogStore;
-    const breedSelected = ({ key }: any) => {
-        dogStore?.loadRandomPictureByBreed(key);
-    }
+    const breedSelected = (value: string) => dogStore?.loadRandomPictureByBreed(value);
     const getAnotherOne = () => {
         dogStore?.refreshRandomPicture();
     }
 
     const breeds = rootStore?.dogStore.breeds || [];
-    const breedMenuItems = breeds.map((breed) => (<Menu.Item onClick={breedSelected} key={breed.name}>{breed.name}</Menu.Item>));
-    const breedMenu = (<Menu>{breedMenuItems}</Menu>);
+    const breedMenu = breeds.map((breed, idx) => (<Option key={`BreedMenuItem${idx}`} value={breed.name}>{breed.name}</Option>));
     
     return (
         <div>
             <Space wrap className="BreedSelectorPanel">
                 <p className="BreedSelectorChoice">Selected breed: {dogStore?.selectedBreed}</p>
-                <Dropdown overlay={breedMenu} arrow><Button >Select Breed</Button></Dropdown>
+                <Select className="BreedSelectorSelect" onChange={breedSelected}>
+                    {breedMenu}
+                </Select>
                 <Button onClick={getAnotherOne}>Get another one!</Button>
             </Space>
         </div>
